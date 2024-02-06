@@ -8,7 +8,33 @@ typedef struct cup_state{
 };
 
 bool solver(std::vector<std::vector<cup_state>> queue, std::vector<std::vector<cup_state>> explored){
-    //convert psuedocode to real code here
+    //implement bfs
+
+    if (queue.empty()){
+        return false;
+    }
+
+    cup_state a = queue[0][0];
+    cup_state b = queue[0][1];
+    cup_state c = queue[0][2];
+
+    queue.erase(queue.begin());
+
+    std::vector<cup_state> current_state;
+    current_state.push_back(a);
+    current_state.push_back(b);
+    current_state.push_back(c);
+
+    for (int i = 0; i < explored.size(); i++){
+        if (a.current == explored[i][0].current && b.current == explored[i][1].current && c.current == explored[i][2].current){
+            return solver(queue, explored);
+        }else{
+            explored.push_back(current_state);
+        }
+    }
+
+    
+
 }
 
 int main(){
