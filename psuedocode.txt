@@ -1,0 +1,98 @@
+Node T: 0/10
+Node S: 7/7
+Node F: 4/4
+
+struct Node{
+    int current
+    const int capacity
+}
+
+function solver(Node * queue[], int explored_states[][]){
+    
+    if queue.empty:
+        return false
+
+    Node * T = queue[0][0]
+    Node * S = queue[0][1]
+    Node * F = queue[0][2]
+
+    queue.pop(0)
+
+    int current_state[] = {T->current, S->current, F->current}
+    if current_state in explored_states:
+        return solver(queue, explored_states)
+    else:
+        explored_states.add(current_state)
+     
+    if S->current == 2 or F->current == 2:
+        return true
+
+    T_space = T->capacity - T -> current
+    S_space = S->capacity - S -> current
+    F_space = F->capacity - F -> current
+
+    if (T_space != 0){
+        node * new_T = T
+        node * new_S = S
+        while (new_T->current < new_T->capacity and new_S->current > 0){
+            new_T -> current += 1
+            new_S -> current -=1
+        }
+        Node format = {new_T, new_S, F}
+        queue.add(format)
+
+
+        node * new_T = T
+        node * new_F = F
+        while (new_T->current < new_T->capacity and new_F->current > 0){
+            new_T -> current += 1
+            new_F -> current -=1
+        }
+        Node format = {new_T, S, new_F}
+        queue.add(format)
+    }
+
+    if (S_space != 0){
+        node * new_S = S
+        node * new_T = T
+        while (new_S->current < new_S->capacity and new_T->current > 0){
+            new_S -> current += 1
+            new_T -> current -=1
+        }
+        Node format = {new_T, new_S, F}
+        queue.add(format)
+
+
+        node * new_S = S
+        node * new_F = F
+        while (new_S->current < new_S->capacity and new_F->current > 0){
+            new_S -> current += 1
+            new_F -> current -=1
+        }
+        Node format = {T, new_S, new_F}
+        queue.add(format)
+    }
+
+    if (F_space != 0){
+        node * new_F = F
+        node * new_T = T
+        while (new_F->current < new_F->capacity and new_T->current > 0){
+            new_F -> current += 1
+            new_T -> current -=1
+        }
+        Node format = {new_T, S, new_F}
+        queue.add(format)
+
+
+        node * new_F = F
+        node * new_S = S
+        while (new_F->current < new_F->capacity and new_S->current > 0){
+            new_F -> current += 1
+            new_S -> current -=1
+        }
+        Node format = {T, new_S, new_F}
+        queue.add(format)
+    }
+
+    return solver(queue, explored_states)
+}
