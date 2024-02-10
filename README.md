@@ -1,6 +1,6 @@
 create an algorithm that can balance water levels between 3 glasses with different limits into 1 glass with a certain level
 
-inspiration:
+inspiration (the program is a bit more general than this question):
 
 You are given three containers with sizes of 10 pints, 7 pints, and 4 pints.
 The 7-pint and 4-pint containers are initially full of water, whereas the 10-pint container is
