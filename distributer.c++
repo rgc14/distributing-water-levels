@@ -14,11 +14,13 @@ bool solver(std::vector<std::vector<struct cup_state>> queue, std::vector<std::v
         return false;
     }
 
-    std::cout<<queue.size()<<"\t"<<explored.size()<<"\t"<<target<<std::endl;
-
     struct cup_state a = queue[0][0];
     struct cup_state b = queue[0][1];
     struct cup_state c = queue[0][2];
+
+    std::cout<<"\nA: "<<a.current<<" / "<<a.capacity<<std::endl;
+    std::cout<<"B: "<<b.current<<" / "<<b.capacity<<std::endl;
+    std::cout<<"C: "<<c.current<<" / "<<c.capacity<<std::endl;
 
     queue.erase(queue.begin());
 
@@ -29,6 +31,7 @@ bool solver(std::vector<std::vector<struct cup_state>> queue, std::vector<std::v
 
     for (int i = 0; i < explored.size(); i++){
         if (a.current == explored[i][0].current && b.current == explored[i][1].current && c.current == explored[i][2].current){
+            std::cout<<"Already an explored state so skip\n";
             return solver(queue, explored, target);
         }
     }
@@ -167,7 +170,13 @@ int main(){
 
     std::vector<std::vector<struct cup_state>> explored;
 
-    std::cout<<solver(queue, explored, target)<<std::endl;
+    int soln = solver(queue, explored, target);
+
+    if (soln == 1){
+        std::cout<<"There is a valid solution\n";
+    }else{
+        std::cout<<"There is no valid solution\n";
+    }
 
     return 0;
 }
