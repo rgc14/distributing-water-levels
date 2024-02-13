@@ -1,5 +1,7 @@
 create an algorithm that can balance water levels between 3 glasses with different limits into 1 glass with a certain level
 
+program currently does not show the correct steps and the path, just displays whether it is possible will work on doing that soon
+
 inspiration (the program is a bit more general than this question):
 
 You are given three containers with sizes of 10 pints, 7 pints, and 4 pints.
